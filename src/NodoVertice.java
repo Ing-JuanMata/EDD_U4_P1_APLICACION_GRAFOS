@@ -28,8 +28,12 @@ public class NodoVertice {
         }
 
         if (arista == null) {
-            arista = nuevo;
+            arista = new NodoArista(direccion);
             return true;
+        }
+        
+        if(buscarArista(direccion) != null){
+            return false;
         }
 
         irUltimo();

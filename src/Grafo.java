@@ -17,14 +17,18 @@ public class Grafo {
     }
 
     public boolean insertarVertice(char dato) {
-        NodoVertice nuevo = new NodoVertice(dato);
-        if (nuevo == null) {
+        if (vertice == null) {
+            vertice = new NodoVertice(dato);
+            return true;
+        }
+
+        if (buscarVertice(dato) != null) {
             return false;
         }
 
-        if (vertice == null) {
-            vertice = nuevo;
-            return true;
+        NodoVertice nuevo = new NodoVertice(dato);
+        if (nuevo == null) {
+            return false;
         }
 
         // el nuevo se enlaza al final de la lista de VERTICES
@@ -44,6 +48,18 @@ public class Grafo {
         while (vertice.ant != null) {
             vertice = vertice.ant;
         }
+    }
+
+    private int contarVertices() {
+        int i = 0;
+        irPrimero();
+        NodoVertice aux = vertice;
+        while (aux != null) {
+            i++;
+            aux = aux.sig;
+        }
+
+        return i;
     }
 
     private NodoVertice buscarVertice(char dato) {
@@ -71,15 +87,14 @@ public class Grafo {
 
         return nodoOrigen.insertarArista(nodoDestino);
     }
-    
-    
-    public boolean eliminarArista(char origen, char destino){
+
+    public boolean eliminarArista(char origen, char destino) {
         NodoVertice nodoOrigen = buscarVertice(origen);
         NodoVertice nodoDestino = buscarVertice(destino);
-        if(nodoDestino == null || nodoOrigen == null){
+        if (nodoDestino == null || nodoOrigen == null) {
             return false;
         }
-        
+
         return nodoOrigen.eliminarArista(nodoDestino);
     }
 
@@ -127,8 +142,39 @@ public class Grafo {
 
     private void quitaAristasDeOtrosVertices(NodoVertice nodoEliminar) {
         irPrimero();
-        for(NodoVertice buscar = vertice; buscar != null; buscar = buscar.sig){
+        for (NodoVertice buscar = vertice; buscar != null; buscar = buscar.sig) {
             buscar.eliminarArista(nodoEliminar);
         }
+    }
+
+    public boolean[][] matrizAdyacencia() {
+        int v = contarVertices();
+        int j;
+        boolean matriz[][] = new boolean[v][v];
+        for (int i = 0; i < v; i++) {
+            for (j = 0; j < v; j++) {
+                matriz[i][j] = false;
+            }
+        }
+        for (int i = 0; i < v; i++) {
+            j = 0;
+            while (i != j) {
+                j++;
+                vertice = vertice.sig;
+            }
+            NodoArista aux = vertice.arista;
+            irPrimero();
+            while (aux != null) {
+                j = 0;
+                while (aux.direccion != vertice) {
+                    vertice = vertice.sig;
+                    j++;
+                }
+                matriz[i][j] = true;
+                aux = aux.abajo;
+                irPrimero();
+            }
+        }
+        return matriz;
     }
 }

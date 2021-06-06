@@ -31,8 +31,8 @@ public class NodoVertice {
             arista = new NodoArista(direccion);
             return true;
         }
-        
-        if(buscarArista(direccion) != null){
+
+        if (buscarArista(direccion) != null) {
             return false;
         }
 
@@ -103,4 +103,16 @@ public class NodoVertice {
         temp.abajo = temp.arriba = null;
         return true;
     }
+
+    @Override
+    public String toString() {
+        String res = "[" + dato + "]";
+        NodoArista aux = arista;
+        while (aux != null) {
+            res += "->" + aux.direccion.dato;
+            aux = aux.abajo;
+        }
+        return res;
+    }
+
 }

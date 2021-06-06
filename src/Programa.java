@@ -36,7 +36,7 @@ public class Programa extends javax.swing.JFrame {
         comboOrigen = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         comboDestino = new javax.swing.JComboBox<>();
-        btnArista = new javax.swing.JButton();
+        btnAgregarArista = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         comboVertices = new javax.swing.JComboBox<>();
         btnLista = new javax.swing.JButton();
@@ -47,6 +47,7 @@ public class Programa extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtSalida = new javax.swing.JTextArea();
         btnEliminar = new javax.swing.JButton();
+        btnEliminarArista = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,18 +64,26 @@ public class Programa extends javax.swing.JFrame {
 
         jLabel3.setText("Hacia");
 
-        btnArista.setText("Agregar Arista");
-        btnArista.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarArista.setText("Agregar Arista");
+        btnAgregarArista.setEnabled(false);
+        btnAgregarArista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAristaActionPerformed(evt);
+                btnAgregarAristaActionPerformed(evt);
             }
         });
 
         jLabel4.setText("Vertices");
 
         btnLista.setText("Lista Adyacencia");
+        btnLista.setEnabled(false);
+        btnLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListaActionPerformed(evt);
+            }
+        });
 
         btnMatriz.setText("Matriz Adyacencia");
+        btnMatriz.setEnabled(false);
         btnMatriz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMatrizActionPerformed(evt);
@@ -84,16 +93,31 @@ public class Programa extends javax.swing.JFrame {
         jLabel5.setText("Camino");
 
         btnCamino.setText("Validar");
+        btnCamino.setEnabled(false);
+        btnCamino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCaminoActionPerformed(evt);
+            }
+        });
 
         txtSalida.setColumns(20);
-        txtSalida.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtSalida.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtSalida.setRows(5);
         jScrollPane1.setViewportView(txtSalida);
 
         btnEliminar.setText("Eliminar Vertice");
+        btnEliminar.setEnabled(false);
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
+            }
+        });
+
+        btnEliminarArista.setText("Eliminar Arista");
+        btnEliminarArista.setEnabled(false);
+        btnEliminarArista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarAristaActionPerformed(evt);
             }
         });
 
@@ -104,42 +128,47 @@ public class Programa extends javax.swing.JFrame {
             .add(layout.createSequentialGroup()
                 .add(17, 17, 17)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jScrollPane1)
                     .add(layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jLabel1)
-                            .add(jLabel2))
-                        .add(18, 18, 18)
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(layout.createSequentialGroup()
-                                .add(txtValor, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(jLabel1)
+                                    .add(jLabel2))
                                 .add(18, 18, 18)
-                                .add(btnVertice))
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(layout.createSequentialGroup()
+                                        .add(txtValor, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .add(18, 18, 18)
+                                        .add(btnVertice))
+                                    .add(layout.createSequentialGroup()
+                                        .add(comboOrigen, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .add(18, 18, 18)
+                                        .add(jLabel3)
+                                        .add(18, 18, 18)
+                                        .add(comboDestino, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .add(18, 18, 18)
+                                        .add(btnAgregarArista)
+                                        .add(18, 18, 18)
+                                        .add(btnEliminarArista))))
                             .add(layout.createSequentialGroup()
-                                .add(comboOrigen, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(jLabel5)
                                 .add(18, 18, 18)
-                                .add(jLabel3)
+                                .add(txtCamino, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .add(18, 18, 18)
-                                .add(comboDestino, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(btnCamino)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(btnLista))
+                            .add(layout.createSequentialGroup()
+                                .add(jLabel4)
                                 .add(18, 18, 18)
-                                .add(btnArista))))
-                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 377, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(layout.createSequentialGroup()
-                        .add(jLabel5)
-                        .add(18, 18, 18)
-                        .add(txtCamino, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(18, 18, 18)
-                        .add(btnCamino)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(btnLista))
-                    .add(layout.createSequentialGroup()
-                        .add(jLabel4)
-                        .add(18, 18, 18)
-                        .add(comboVertices, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(btnEliminar)
-                        .add(12, 12, 12)
-                        .add(btnMatriz)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                                .add(comboVertices, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                .add(btnEliminar)
+                                .add(12, 12, 12)
+                                .add(btnMatriz)))
+                        .add(0, 27, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -155,7 +184,8 @@ public class Programa extends javax.swing.JFrame {
                     .add(comboOrigen, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jLabel3)
                     .add(comboDestino, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(btnArista))
+                    .add(btnAgregarArista)
+                    .add(btnEliminarArista))
                 .add(24, 24, 24)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel4)
@@ -182,6 +212,14 @@ public class Programa extends javax.swing.JFrame {
             comboDestino.addItem(c);
             comboOrigen.addItem(c);
             comboVertices.addItem(c);
+            if (!btnEliminar.isEnabled()) {
+                btnMatriz.setEnabled(true);
+                btnLista.setEnabled(true);
+                btnAgregarArista.setEnabled(true);
+                btnEliminar.setEnabled(true);
+                btnEliminarArista.setEnabled(true);
+                btnCamino.setEnabled(true);
+            }
         }
     }//GEN-LAST:event_btnVerticeActionPerformed
 
@@ -191,29 +229,65 @@ public class Programa extends javax.swing.JFrame {
             comboVertices.removeItem(v);
             comboDestino.removeItem(v);
             comboOrigen.removeItem(v);
+            if (grafo.contarVertices() == 0) {
+                btnMatriz.setEnabled(false);
+                btnLista.setEnabled(false);
+                btnAgregarArista.setEnabled(false);
+                btnEliminar.setEnabled(false);
+                btnEliminarArista.setEnabled(false);
+                btnCamino.setEnabled(false);
+            }
+            txtSalida.setText("VERTICE ELIMINADO CORRECTAMENTE");
+
+            return;
         }
+
+        txtSalida.setText("EL VERTICE AUN CUENTA CON ARISTAS");
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void btnAristaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAristaActionPerformed
+    private void btnAgregarAristaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAristaActionPerformed
         grafo.insertarAristas((char) comboOrigen.getSelectedItem(), (char) comboDestino.getSelectedItem());
-    }//GEN-LAST:event_btnAristaActionPerformed
+    }//GEN-LAST:event_btnAgregarAristaActionPerformed
 
     private void btnMatrizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMatrizActionPerformed
         boolean datos[][] = grafo.matrizAdyacencia();
         String salida = "   ";
-        for(int i = 0; i < comboVertices.getItemCount(); i++){
+        for (int i = 0; i < comboVertices.getItemCount(); i++) {
             salida += comboVertices.getItemAt(i) + " ";
         }
-        
-        for(int i = 0; i < comboVertices.getItemCount(); i++){
+
+        for (int i = 0; i < comboVertices.getItemCount(); i++) {
             salida += "\n" + comboVertices.getItemAt(i) + " ";
-            for(int j = 0; j < comboVertices.getItemCount(); j++){
+            for (int j = 0; j < comboVertices.getItemCount(); j++) {
                 salida += datos[i][j] ? "1 " : "0 ";
             }
         }
-        
+
         txtSalida.setText(salida);
     }//GEN-LAST:event_btnMatrizActionPerformed
+
+    private void btnEliminarAristaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAristaActionPerformed
+        grafo.eliminarArista((char) comboOrigen.getSelectedItem(), (char) comboDestino.getSelectedItem());
+    }//GEN-LAST:event_btnEliminarAristaActionPerformed
+
+    private void btnListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaActionPerformed
+        if (comboVertices.getItemCount() > 0)
+            txtSalida.setText(grafo.listaAdyacencia((char) comboVertices.getSelectedItem()));
+    }//GEN-LAST:event_btnListaActionPerformed
+
+    private void btnCaminoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCaminoActionPerformed
+        String camino = txtCamino.getText().trim();
+
+        if (camino.matches("^[a-zA-z0-9]{2,}$") || camino.equals("")) {
+            txtSalida.setText("ENTRADA DE TEXTO INCORRECTA\nFORMATO: A,B,C,D...");
+            return;
+        }
+
+        if (camino.matches("^\\S[A-z0-9]?[,]?([A-z0-9][,])*[A-z0-9]?$")) {
+            String txt = txtCamino.getText().trim().replaceAll(",", "");
+            txtSalida.setText(grafo.validar(txt.toCharArray()));
+        }
+    }//GEN-LAST:event_btnCaminoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -251,9 +325,10 @@ public class Programa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnArista;
+    private javax.swing.JButton btnAgregarArista;
     private javax.swing.JButton btnCamino;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnEliminarArista;
     private javax.swing.JButton btnLista;
     private javax.swing.JButton btnMatriz;
     private javax.swing.JButton btnVertice;

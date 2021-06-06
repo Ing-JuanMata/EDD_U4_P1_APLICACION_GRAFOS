@@ -50,7 +50,10 @@ public class Grafo {
         }
     }
 
-    private int contarVertices() {
+    public int contarVertices() {
+        if (vertice == null) {
+            return 0;
+        }
         int i = 0;
         irPrimero();
         NodoVertice aux = vertice;
@@ -148,6 +151,9 @@ public class Grafo {
     }
 
     public boolean[][] matrizAdyacencia() {
+        if (vertice == null) {
+            return null;
+        }
         int v = contarVertices();
         int j;
         boolean matriz[][] = new boolean[v][v];
@@ -176,5 +182,22 @@ public class Grafo {
             }
         }
         return matriz;
+    }
+
+    public String listaAdyacencia(char dato) {
+        return buscarVertice(dato).toString();
+    }
+
+    public String validar(char[] camino) {
+        String res = "CAMINO NO VALIDO";
+        if (camino.length == 1) {
+            return buscarVertice(camino[0]) == null ? res : "CAMINO VALIDO";
+        }
+        for (int i = 0; i < camino.length - 1; i++) {
+            if (buscarVertice(camino[i]).buscarArista(buscarVertice(camino[i + 1])) != null) {
+                res = "CAMINO VALIDO";
+            }
+        }
+        return res;
     }
 }

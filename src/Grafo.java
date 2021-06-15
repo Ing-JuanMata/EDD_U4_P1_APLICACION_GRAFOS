@@ -169,6 +169,7 @@ public class Grafo {
                 vertice = vertice.sig;
             }
             NodoArista aux = vertice.arista;
+            
             irPrimero();
             while (aux != null) {
                 j = 0;

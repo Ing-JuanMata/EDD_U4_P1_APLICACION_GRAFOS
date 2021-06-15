@@ -39,7 +39,7 @@ public class NodoVertice {
         irUltimo();
         arista.abajo = nuevo;
         nuevo.arriba = arista;
-        nuevo.arriba = arista;
+        irPrimero();
         return true;
     }
 
